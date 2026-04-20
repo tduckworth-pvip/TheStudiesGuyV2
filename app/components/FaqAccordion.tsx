@@ -37,18 +37,18 @@ export default function FaqAccordion() {
       {faqs.map((faq, i) => (
         <div
           key={i}
-          className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden"
+          className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
         >
           <button
             onClick={() => setOpen(open === i ? null : i)}
             aria-expanded={open === i}
             className="w-full flex items-center justify-between px-6 py-5 text-left
-              text-white font-medium cursor-pointer hover:bg-white/5 transition-colors duration-200
+              text-slate-900 font-medium cursor-pointer hover:bg-slate-50 transition-colors duration-200
               focus:outline-none focus:ring-2 focus:ring-cyan-400/60 focus:ring-inset"
           >
             <span>{faq.q}</span>
             <svg
-              className={`w-5 h-5 text-cyan-400 shrink-0 ml-4 transition-transform duration-200
+              className={`w-5 h-5 text-cyan-500 shrink-0 ml-4 transition-transform duration-200
                 ${open === i ? 'rotate-180' : ''}`}
               fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"
             >
@@ -56,7 +56,7 @@ export default function FaqAccordion() {
             </svg>
           </button>
           {open === i && (
-            <div className="px-6 pb-5 text-slate-300 text-sm leading-relaxed border-t border-white/10 pt-4">
+            <div className="px-6 pb-5 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
               {faq.a}
             </div>
           )}

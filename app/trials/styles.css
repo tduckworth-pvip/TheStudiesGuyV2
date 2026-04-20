@@ -1,0 +1,49 @@
+/* ─── Trials section styles ─────────────────────────────────────────────── */
+
+/* Card hover glow */
+.trial-card {
+  transition: box-shadow 200ms ease, border-color 200ms ease, background-color 200ms ease;
+}
+.trial-card:hover {
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.15), 0 8px 32px rgba(34, 211, 238, 0.06);
+}
+
+/* Scrollable trial detail content */
+.trial-detail-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(203 213 225) transparent;
+}
+.trial-detail-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.trial-detail-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.trial-detail-scroll::-webkit-scrollbar-thumb {
+  background: rgb(203 213 225);
+  border-radius: 9999px;
+}
+.trial-detail-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgb(148 163 184);
+}
+
+/* Eligibility criteria long-form text */
+.eligibility-text {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: rgb(71 85 105);
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}
+.eligibility-text strong,
+.eligibility-text b {
+  color: rgb(15 23 42);
+  font-weight: 600;
+}
+
+/* Recruiting pulse — accessible reduced-motion override */
+@media (prefers-reduced-motion: reduce) {
+  .recruiting-pulse {
+    animation: none;
+  }
+}
