@@ -1,3 +1,5 @@
+import { PHASE_API_MAP } from './trial-constants'
+
 const BASE_URL = 'https://clinicaltrials.gov/api/v2'
 
 export interface TrialStudy {
@@ -17,15 +19,37 @@ export interface TrialStudy {
     }
     descriptionModule?: {
       briefSummary?: string
+      detailedDescription?: string
     }
     designModule?: {
       phases?: string[]
+      enrollmentInfo?: { count?: number; type?: string }
     }
     contactsLocationsModule?: {
+      centralContacts?: Array<{
+        name?: string
+        role?: string
+        phone?: string
+        email?: string
+      }>
+      overallOfficials?: Array<{
+        name?: string
+        affiliation?: string
+        role?: string
+      }>
       locations?: Array<{
+        facility?: string
         city?: string
         state?: string
         country?: string
+        status?: string
+        geoPoint?: { lat: number; lon: number }
+        contacts?: Array<{
+          name?: string
+          role?: string
+          phone?: string
+          email?: string
+        }>
       }>
     }
     sponsorCollaboratorsModule?: {
@@ -35,6 +59,26 @@ export interface TrialStudy {
       minimumAge?: string
       maximumAge?: string
       sex?: string
+      eligibilityCriteria?: string
+    }
+    armsInterventionsModule?: {
+      interventions?: Array<{
+        type?: string
+        name?: string
+        description?: string
+      }>
+    }
+    outcomesModule?: {
+      primaryOutcomes?: Array<{
+        measure?: string
+        description?: string
+        timeFrame?: string
+      }>
+      secondaryOutcomes?: Array<{
+        measure?: string
+        description?: string
+        timeFrame?: string
+      }>
     }
   }
 }
@@ -44,6 +88,9 @@ export interface TrialSearchParams {
   intervention?: string
   status?: string[]
   phase?: string[]
+  lat?: number
+  lng?: number
+  radiusMiles?: number
   pageSize?: number
   pageToken?: string
 }
@@ -60,8 +107,15 @@ export async function searchTrials(params: TrialSearchParams): Promise<TrialSear
   if (params.condition) query.set('query.cond', params.condition)
   if (params.intervention) query.set('query.intr', params.intervention)
   if (params.status?.length) query.set('filter.overallStatus', params.status.join(','))
-  if (params.phase?.length) query.set('filter.phase', params.phase.join(','))
+  if (params.phase?.length) {
+    const numeric = params.phase.map(p => PHASE_API_MAP[p]).filter(Boolean)
+    if (numeric.length) query.set('aggFilters', `phase:${numeric.join(',')}`)
+  }
   query.set('pageSize', String(params.pageSize ?? 10))
+  if (params.lat != null && params.lng != null) {
+    const radius = params.radiusMiles ?? 50
+    query.set('filter.geo', `distance(${params.lat},${params.lng},${radius}mi)`)
+  }
   if (params.pageToken) query.set('pageToken', params.pageToken)
   query.set('format', 'json')
 

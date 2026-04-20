@@ -3,11 +3,11 @@ import { getTrialStats } from '@/lib/clinicaltrials'
 function StatCard({ value, label, icon }: { value: string; label: string; icon: React.ReactNode }) {
   return (
     <div className="flex flex-col items-center gap-3 px-8 py-6 rounded-2xl
-      bg-white/5 backdrop-blur-md border border-white/10 hover:border-cyan-400/30
-      transition-colors duration-200">
-      <div className="text-cyan-400">{icon}</div>
-      <p className="text-3xl font-bold text-white">{value}</p>
-      <p className="text-sm text-slate-400 text-center leading-snug">{label}</p>
+      bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-cyan-200
+      transition-all duration-200">
+      <div className="text-cyan-500">{icon}</div>
+      <p className="text-3xl font-bold text-slate-900">{value}</p>
+      <p className="text-sm text-slate-500 text-center leading-snug">{label}</p>
     </div>
   )
 }

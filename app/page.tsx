@@ -3,6 +3,7 @@ import Link from 'next/link'
 import SearchBar from './components/SearchBar'
 import StatsSection from './components/StatsSection'
 import FaqAccordion from './components/FaqAccordion'
+import Navbar from './components/Navbar'
 
 const CONDITIONS = [
   'Cancer', 'Diabetes', 'Heart Disease', 'Alzheimer\'s',
@@ -81,51 +82,29 @@ const STEPS = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #05091a 0%, #0a0e27 50%, #05091a 100%)' }}>
+    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #f8fafc 100%)' }}>
 
-      {/* Nav */}
-      <nav className="fixed top-4 left-4 right-4 z-50 flex items-center justify-between
-        px-6 py-3 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10">
-        <Link href="/" className="flex items-center gap-2 text-white font-semibold text-lg">
-          <div className="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center">
-            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-          </div>
-          TheStudiesGuy
-        </Link>
-        <div className="hidden md:flex items-center gap-6 text-sm text-slate-300">
-          <Link href="/trials" className="hover:text-white transition-colors duration-200 cursor-pointer">Browse Trials</Link>
-          <Link href="/#how-it-works" className="hover:text-white transition-colors duration-200 cursor-pointer">How It Works</Link>
-          <Link href="/#faq" className="hover:text-white transition-colors duration-200 cursor-pointer">FAQ</Link>
-        </div>
-        <Link href="/trials"
-          className="px-4 py-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-white text-sm font-semibold
-            transition-colors duration-200 cursor-pointer">
-          Find Trials
-        </Link>
-      </nav>
+      <Navbar cta={{ label: 'Find Trials', href: '/trials', variant: 'primary' }} />
 
       {/* Hero */}
       <section className="pt-40 pb-24 px-4">
         <div className="max-w-4xl mx-auto text-center">
 
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full
-            bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium mb-8">
-            <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" aria-hidden="true" />
+            bg-cyan-50 border border-cyan-200 text-cyan-700 text-sm font-medium mb-8">
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" aria-hidden="true" />
             Live data from ClinicalTrials.gov
           </div>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-slate-900 leading-tight mb-6">
             Discover Life-Changing{' '}
             <span className="text-transparent bg-clip-text"
-              style={{ backgroundImage: 'linear-gradient(90deg, #22d3ee, #0891b2)' }}>
+              style={{ backgroundImage: 'linear-gradient(90deg, #0891b2, #0e7490)' }}>
               Clinical Trials
             </span>
           </h1>
 
-          <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10 leading-relaxed">
             Search hundreds of thousands of clinical studies from ClinicalTrials.gov.
             Free to browse. No insurance required. Connect with cutting-edge treatments today.
           </p>
@@ -137,8 +116,8 @@ export default function HomePage() {
             <span className="text-slate-500 text-sm self-center">Popular:</span>
             {CONDITIONS.map(c => (
               <Link key={c} href={`/trials?condition=${encodeURIComponent(c)}`}
-                className="px-3 py-1.5 rounded-full text-xs text-slate-300 bg-white/5 border border-white/10
-                  hover:border-cyan-400/40 hover:text-cyan-300 transition-colors duration-200 cursor-pointer">
+                className="px-3 py-1.5 rounded-full text-xs text-slate-600 bg-white border border-slate-200
+                  hover:border-cyan-400 hover:text-cyan-700 transition-colors duration-200 cursor-pointer shadow-sm">
                 {c}
               </Link>
             ))}
@@ -152,7 +131,7 @@ export default function HomePage() {
           <Suspense fallback={
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-32 rounded-2xl bg-white/5 animate-pulse" />
+                <div key={i} className="h-32 rounded-2xl bg-white animate-pulse" />
               ))}
             </div>
           }>
@@ -165,24 +144,24 @@ export default function HomePage() {
       <section className="py-24 px-4" id="features">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
               Everything you need to find your trial
             </h2>
-            <p className="text-slate-400 max-w-xl mx-auto">
+            <p className="text-slate-500 max-w-xl mx-auto">
               Built on the official ClinicalTrials.gov API v2 — the world's largest registry of clinical research.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {FEATURES.map(f => (
               <div key={f.title}
-                className="p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10
-                  hover:border-cyan-400/30 hover:bg-white/8 transition-all duration-200 group">
-                <div className="w-10 h-10 rounded-xl bg-cyan-500/15 flex items-center justify-center
-                  text-cyan-400 mb-4 group-hover:bg-cyan-500/25 transition-colors duration-200">
+                className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm
+                  hover:shadow-md hover:border-cyan-200 transition-all duration-200 group">
+                <div className="w-10 h-10 rounded-xl bg-cyan-50 flex items-center justify-center
+                  text-cyan-600 mb-4 group-hover:bg-cyan-100 transition-colors duration-200">
                   {f.icon}
                 </div>
-                <h3 className="text-white font-semibold mb-2">{f.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{f.desc}</p>
+                <h3 className="text-slate-900 font-semibold mb-2">{f.title}</h3>
+                <p className="text-slate-500 text-sm leading-relaxed">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -193,19 +172,19 @@ export default function HomePage() {
       <section className="py-24 px-4" id="how-it-works">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">How it works</h2>
-            <p className="text-slate-400">Find and join a clinical trial in four simple steps.</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">How it works</h2>
+            <p className="text-slate-500">Find and join a clinical trial in four simple steps.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {STEPS.map((s, i) => (
               <div key={s.step} className="relative">
                 {i < STEPS.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-full w-full h-px bg-linear-to-r from-cyan-500/30 to-transparent z-0" aria-hidden="true" />
+                  <div className="hidden lg:block absolute top-8 left-full w-full h-px bg-linear-to-r from-cyan-300 to-transparent z-0" aria-hidden="true" />
                 )}
-                <div className="relative z-10 p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
-                  <div className="text-4xl font-bold text-cyan-500/30 mb-3">{s.step}</div>
-                  <h3 className="text-white font-semibold mb-2">{s.title}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{s.desc}</p>
+                <div className="relative z-10 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm text-center">
+                  <div className="text-4xl font-bold text-cyan-200 mb-3">{s.step}</div>
+                  <h3 className="text-slate-900 font-semibold mb-2">{s.title}</h3>
+                  <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -213,7 +192,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA Banner */}
+      {/* CTA Banner — keep cyan gradient, it works on both modes */}
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto rounded-3xl overflow-hidden relative"
           style={{ background: 'linear-gradient(135deg, #0891b2 0%, #0e7490 100%)' }}>
@@ -243,19 +222,19 @@ export default function HomePage() {
       <section className="py-24 px-4" id="faq">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
               Common questions
             </h2>
-            <p className="text-slate-400">Everything you need to know about clinical trials.</p>
+            <p className="text-slate-500">Everything you need to know about clinical trials.</p>
           </div>
           <FaqAccordion />
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 py-10 px-4 mt-8">
+      <footer className="border-t border-slate-200 bg-white py-10 px-4 mt-8">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-slate-400 text-sm">
+          <div className="flex items-center gap-2 text-slate-600 text-sm">
             <div className="w-6 h-6 rounded bg-cyan-500 flex items-center justify-center">
               <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -264,7 +243,7 @@ export default function HomePage() {
             </div>
             <span>TheStudiesGuy — Powered by ClinicalTrials.gov</span>
           </div>
-          <p className="text-slate-500 text-xs text-center max-w-sm">
+          <p className="text-slate-400 text-xs text-center max-w-sm">
             For informational purposes only. Always consult a healthcare professional before joining any clinical study.
           </p>
         </div>
