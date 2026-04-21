@@ -1,9 +1,10 @@
 import Link from 'next/link'
 
 const NAV_LINKS = [
-  { href: '/trials', label: 'Browse Trials' },
-  { href: '/#how-it-works', label: 'How It Works' },
+  { href: '/', label: 'Home' },
+  { href: '/search', label: 'Guided Search' },
   { href: '/#faq', label: 'FAQ' },
+  { href: '/disclaimer', label: 'Disclaimer' },
 ]
 
 interface NavbarProps {

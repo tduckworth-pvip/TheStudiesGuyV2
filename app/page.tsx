@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import Link from 'next/link'
 import SearchBar from './components/SearchBar'
 import StatsSection from './components/StatsSection'
@@ -73,12 +72,7 @@ const FEATURES = [
   },
 ]
 
-const STEPS = [
-  { step: '01', title: 'Search', desc: 'Enter a condition, disease, or keyword to find relevant trials.' },
-  { step: '02', title: 'Filter', desc: 'Narrow results by status, phase, location, or intervention.' },
-  { step: '03', title: 'Review', desc: 'Read eligibility requirements and trial details in full.' },
-  { step: '04', title: 'Connect', desc: 'Contact the study team directly through the trial listing.' },
-]
+
 
 export default function HomePage() {
   return (
@@ -112,31 +106,36 @@ export default function HomePage() {
           <SearchBar />
 
           {/* Quick search tags */}
-          <div className="mt-6 flex flex-wrap justify-center gap-2">
+          <div className="mt-8 flex flex-wrap justify-center gap-2">
             <span className="text-slate-500 text-sm self-center">Popular:</span>
-            {CONDITIONS.map(c => (
-              <Link key={c} href={`/trials?condition=${encodeURIComponent(c)}`}
-                className="px-3 py-1.5 rounded-full text-xs text-slate-600 bg-white border border-slate-200
-                  hover:border-cyan-400 hover:text-cyan-700 transition-colors duration-200 cursor-pointer shadow-sm">
-                {c}
-              </Link>
-            ))}
           </div>
+
+          {/* Badges + tip */}
+          <div className="mt-4 flex flex-wrap justify-center gap-4">
+            <span className="flex items-center gap-1.5 text-sm text-slate-600">
+              <span className="h-2 w-2 rounded-full bg-blue-500 inline-block" />
+              Free to participate
+            </span>
+            <span className="flex items-center gap-1.5 text-sm text-slate-600">
+              <span className="h-2 w-2 rounded-full bg-blue-500 inline-block" />
+              No insurance needed
+            </span>
+            <span className="flex items-center gap-1.5 text-sm text-slate-600">
+              <span className="h-2 w-2 rounded-full bg-red-500 inline-block" />
+              Get paid for your time
+            </span>
+          </div>
+          <p className="mt-3 text-center text-xs text-slate-400">
+            💡 Tip: Press Enter in any field or click &ldquo;Search Trials&rdquo; to find matching clinical trials
+          </p>
         </div>
       </section>
 
+
       {/* Stats */}
-      <section className="pb-24 px-4">
+      <section className="pb-16 px-4">
         <div className="max-w-5xl mx-auto">
-          <Suspense fallback={
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[...Array(4)].map((_, i) => (
-                <div key={i} className="h-32 rounded-2xl bg-white animate-pulse" />
-              ))}
-            </div>
-          }>
-            <StatsSection />
-          </Suspense>
+          <StatsSection />
         </div>
       </section>
 
@@ -168,31 +167,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="py-24 px-4" id="how-it-works">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">How it works</h2>
-            <p className="text-slate-500">Find and join a clinical trial in four simple steps.</p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {STEPS.map((s, i) => (
-              <div key={s.step} className="relative">
-                {i < STEPS.length - 1 && (
-                  <div className="hidden lg:block absolute top-8 left-full w-full h-px bg-linear-to-r from-cyan-300 to-transparent z-0" aria-hidden="true" />
-                )}
-                <div className="relative z-10 p-6 rounded-2xl bg-white border border-slate-200 shadow-sm text-center">
-                  <div className="text-4xl font-bold text-cyan-200 mb-3">{s.step}</div>
-                  <h3 className="text-slate-900 font-semibold mb-2">{s.title}</h3>
-                  <p className="text-slate-500 text-sm leading-relaxed">{s.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Banner — keep cyan gradient, it works on both modes */}
+{/* CTA Banner — keep cyan gradient, it works on both modes */}
       <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto rounded-3xl overflow-hidden relative"
           style={{ background: 'linear-gradient(135deg, #0891b2 0%, #0e7490 100%)' }}>

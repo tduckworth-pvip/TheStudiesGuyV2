@@ -7,6 +7,41 @@ import TrialsFilters from './TrialsFilters'
 import Pagination from './Pagination'
 import Navbar from '@/app/components/Navbar'
 
+// Parse age strings like "18 Years", "6 Months", "N/A" into years
+function parseAgeToYears(ageStr?: string): number | null {
+  if (!ageStr || ageStr === 'N/A') return null
+  const match = ageStr.match(/(\d+)\s*(year|month|week|day)/i)
+  if (!match) return null
+  const n = parseInt(match[1])
+  const unit = match[2].toLowerCase()
+  if (unit.startsWith('year')) return n
+  if (unit.startsWith('month')) return Math.floor(n / 12)
+  if (unit.startsWith('week')) return Math.floor(n / 52)
+  return 0
+}
+
+function filterByAge(studies: TrialStudy[], age: number): TrialStudy[] {
+  return studies.filter(study => {
+    const elig = study.protocolSection.eligibilityModule
+    if (!elig) return true
+    const min = parseAgeToYears(elig.minimumAge)
+    const max = parseAgeToYears(elig.maximumAge)
+    if (min !== null && age < min) return false
+    if (max !== null && age > max) return false
+    return true
+  })
+}
+
+// eligibilityModule.sex is "ALL", "MALE", or "FEMALE"
+function filterBySex(studies: TrialStudy[], sex: string): TrialStudy[] {
+  const upper = sex.toUpperCase()
+  return studies.filter(study => {
+    const eligSex = study.protocolSection.eligibilityModule?.sex?.toUpperCase()
+    if (!eligSex || eligSex === 'ALL') return true
+    return eligSex === upper
+  })
+}
+
 function prioritiseStudies(studies: TrialStudy[], country?: string): TrialStudy[] {
   // Reorder each study's locations so the searched-country site appears first
   if (country) {
@@ -18,8 +53,16 @@ function prioritiseStudies(studies: TrialStudy[], country?: string): TrialStudy[
       study.protocolSection.contactsLocationsModule!.locations = [...nearby, ...elsewhere]
     }
   }
-  // Sort studies: RECRUITING → NOT_YET_RECRUITING → AVAILABLE → rest
+  const hasUsLocation = (study: TrialStudy) =>
+    study.protocolSection.contactsLocationsModule?.locations?.some(
+      l => l.country === 'United States'
+    ) ?? false
+
+  // Sort: US trials first, then by recruiting status
   return [...studies].sort((a, b) => {
+    const usA = hasUsLocation(a) ? 0 : 1
+    const usB = hasUsLocation(b) ? 0 : 1
+    if (usA !== usB) return usA - usB
     const pa = STATUS_PRIORITY[a.protocolSection.statusModule.overallStatus] ?? 99
     const pb = STATUS_PRIORITY[b.protocolSection.statusModule.overallStatus] ?? 99
     return pa - pb
@@ -31,6 +74,8 @@ interface PageProps {
     condition?: string
     status?: string
     phase?: string
+    sex?: string
+    age?: string
     lat?: string
     lng?: string
     location?: string
@@ -44,6 +89,8 @@ async function TrialsList({
   condition,
   status,
   phase,
+  sex,
+  age,
   lat,
   lng,
   location,
@@ -54,6 +101,8 @@ async function TrialsList({
   condition?: string
   status?: string
   phase?: string
+  sex?: string
+  age?: number
   lat?: number
   lng?: number
   location?: string
@@ -65,6 +114,7 @@ async function TrialsList({
     condition: condition || undefined,
     status: status ? [status] : undefined,
     phase: phase ? [phase] : undefined,
+    sex: sex || undefined,
     lat,
     lng,
     pageToken: pageToken || undefined,
@@ -72,7 +122,9 @@ async function TrialsList({
   })
 
   const { nextPageToken, totalCount } = result
-  const studies = prioritiseStudies(result.studies, country)
+  const sorted = prioritiseStudies(result.studies, country)
+  const ageFiltered = age != null ? filterByAge(sorted, age) : sorted
+  const studies = sex ? filterBySex(ageFiltered, sex) : ageFiltered
 
   if (!studies.length) {
     return (
@@ -133,6 +185,8 @@ export default async function TrialsPage({ searchParams }: PageProps) {
   const condition = params.condition ?? ''
   const status = params.status ?? ''
   const phase = params.phase ?? ''
+  const sex = params.sex ?? ''
+  const age = params.age ? parseInt(params.age) : undefined
   const lat = params.lat ? parseFloat(params.lat) : undefined
   const lng = params.lng ? parseFloat(params.lng) : undefined
   const location = params.location ?? ''
@@ -140,7 +194,7 @@ export default async function TrialsPage({ searchParams }: PageProps) {
   const pageToken = params.pageToken ?? ''
   const page = Number(params.page ?? 1)
 
-  const hasFilters = !!(condition || status || phase || lat)
+  const hasFilters = !!(condition || status || phase || lat || sex || age)
 
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 40%, #f8fafc 100%)' }}>
@@ -184,11 +238,13 @@ export default async function TrialsPage({ searchParams }: PageProps) {
 
             {/* Results */}
             <main className="flex-1 min-w-0">
-              <Suspense key={`${condition}-${status}-${phase}-${lat}-${pageToken}`} fallback={<TrialsListSkeleton />}>
+              <Suspense key={`${condition}-${status}-${phase}-${sex}-${age}-${lat}-${pageToken}`} fallback={<TrialsListSkeleton />}>
                 <TrialsList
                   condition={condition}
                   status={status}
                   phase={phase}
+                  sex={sex}
+                  age={age}
                   lat={lat}
                   lng={lng}
                   location={location}
