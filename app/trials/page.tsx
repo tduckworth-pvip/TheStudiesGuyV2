@@ -149,8 +149,8 @@ async function TrialsList({
           <span className="text-slate-900 font-medium">
             {totalCount.toLocaleString()} total results
           </span>
-          {condition && <> for <span className="text-cyan-600">&quot;{condition}&quot;</span></>}
-          {lat != null && <> within <span className="text-cyan-600">50 miles</span></>}
+          {condition && <> for <span className="text-sky-600">&quot;{condition}&quot;</span></>}
+          {lat != null && <> within <span className="text-sky-600">50 miles</span></>}
         </p>
       )}
 
@@ -224,7 +224,7 @@ export default async function TrialsPage({ searchParams }: PageProps) {
             <aside className="lg:w-64 shrink-0">
               <div className="sticky top-24 p-5 rounded-2xl bg-white border border-slate-200 shadow-sm">
                 <h2 className="text-slate-900 font-semibold mb-4 flex items-center gap-2">
-                  <svg className="w-4 h-4 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <svg className="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                       d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L13 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 017 21v-7.586L3.293 6.707A1 1 0 013 6V4z" />
                   </svg>

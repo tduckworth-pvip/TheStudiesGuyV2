@@ -17,7 +17,7 @@ export default function DisclaimerPage() {
           </Link>
 
           <h1 className="text-3xl font-bold text-slate-900 mb-1">Disclaimer</h1>
-          <p className="text-sm text-cyan-600 mb-8">Important information about our clinical trial listing service</p>
+          <p className="text-sm text-sky-600 mb-8">Important information about our clinical trial listing service</p>
 
           <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 space-y-8">
 
@@ -45,9 +45,9 @@ export default function DisclaimerPage() {
               </p>
             </section>
 
-            <div className="rounded-xl bg-cyan-50 border border-cyan-200 p-5">
-              <p className="text-sm font-semibold text-cyan-800 mb-2">Important Notice</p>
-              <p className="text-sm text-cyan-700 leading-relaxed">
+            <div className="rounded-xl bg-sky-50 border border-sky-200 p-5">
+              <p className="text-sm font-semibold text-sky-800 mb-2">Important Notice</p>
+              <p className="text-sm text-sky-700 leading-relaxed">
                 This platform serves as an informational resource only. Clinical trial participation involves significant medical decisions that should be made in consultation with qualified healthcare professionals. The information provided here is not a substitute for professional medical advice, diagnosis, or treatment.
               </p>
             </div>
@@ -57,7 +57,7 @@ export default function DisclaimerPage() {
           <div className="mt-10 text-center">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-sm transition-colors duration-200"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-semibold text-sm transition-colors duration-200"
             >
               Return to Home
             </Link>

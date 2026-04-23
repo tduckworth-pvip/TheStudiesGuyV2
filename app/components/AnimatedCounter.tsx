@@ -42,7 +42,7 @@ export function AnimatedCounter({ target, duration = 2000, suffix = "" }: Props)
   }, [target, duration])
 
   return (
-    <span ref={ref}>
+    <span ref={ref} suppressHydrationWarning>
       {value.toLocaleString()}{suffix}
     </span>
   )

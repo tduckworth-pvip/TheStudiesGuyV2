@@ -34,17 +34,17 @@ export default function TrialCard({ study, lat, lng, location }: Props) {
 
   return (
     <Link href={detailHref} className="trial-card group flex flex-col gap-4 p-6 rounded-2xl
-      bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-cyan-300">
+      bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-sky-300">
 
       {/* Header row */}
       <div className="flex items-start justify-between gap-3">
-        <span className="text-xs font-mono text-cyan-600/70">{nctId}</span>
+        <span className="text-xs font-mono text-sky-600/70">{nctId}</span>
         <StatusBadge status={status} className="shrink-0" />
       </div>
 
       {/* Title */}
       <h2 className="text-slate-900 font-semibold text-sm leading-snug line-clamp-2
-        group-hover:text-cyan-700 transition-colors duration-200">
+        group-hover:text-sky-700 transition-colors duration-200">
         {title}
       </h2>
 
@@ -58,7 +58,7 @@ export default function TrialCard({ study, lat, lng, location }: Props) {
       {/* Tags row */}
       <div className="flex flex-wrap gap-1.5 mt-auto">
         {phases.map(ph => (
-          <span key={ph} className="text-xs px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-700 border border-cyan-200">
+          <span key={ph} className="text-xs px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200">
             {ph.replace('_', ' ')}
           </span>
         ))}
@@ -84,7 +84,7 @@ export default function TrialCard({ study, lat, lng, location }: Props) {
         )}
       </div>
 
-      <span className="text-xs text-cyan-500/70 group-hover:text-cyan-600 transition-colors duration-200">
+      <span className="text-xs text-sky-500/70 group-hover:text-sky-600 transition-colors duration-200">
         View trial details →
       </span>
     </Link>

@@ -44,11 +44,11 @@ export default function FaqAccordion() {
             aria-expanded={open === i}
             className="w-full flex items-center justify-between px-6 py-5 text-left
               text-slate-900 font-medium cursor-pointer hover:bg-slate-50 transition-colors duration-200
-              focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60 focus-visible:rounded-xl"
+              focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 focus-visible:rounded-xl"
           >
             <span>{faq.q}</span>
             <svg
-              className={`w-5 h-5 text-cyan-500 shrink-0 ml-4 transition-transform duration-200
+              className={`w-5 h-5 text-sky-500 shrink-0 ml-4 transition-transform duration-200
                 ${open === i ? 'rotate-180' : ''}`}
               fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"
             >

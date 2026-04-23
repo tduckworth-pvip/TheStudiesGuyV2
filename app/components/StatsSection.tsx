@@ -41,9 +41,9 @@ export default function StatsSection() {
       {STATS.map(({ value, label, icon }) => (
         <div
           key={label}
-          className="flex flex-col items-center gap-3 px-8 py-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-cyan-200 transition-all duration-200"
+          className="flex flex-col items-center gap-3 px-8 py-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:border-sky-200 transition-all duration-200"
         >
-          <div className="text-cyan-500">{icon}</div>
+          <div className="text-sky-500">{icon}</div>
           <p className="text-3xl font-bold text-slate-900">
             <AnimatedCounter target={value} />
           </p>

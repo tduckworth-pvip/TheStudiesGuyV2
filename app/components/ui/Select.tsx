@@ -24,7 +24,7 @@ export function Select({ label, options, id, className = '', ...props }: SelectP
           className={[
             'w-full appearance-none px-3 py-2.5 pr-8 rounded-xl text-sm text-slate-900',
             'bg-white border border-slate-300',
-            'focus:outline-none focus:ring-2 focus:ring-cyan-400/50 focus:border-cyan-500',
+            'focus:outline-none focus:ring-2 focus:ring-sky-400/50 focus:border-sky-500',
             'transition-all duration-200 cursor-pointer',
             className,
           ].join(' ')}
