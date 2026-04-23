@@ -34,7 +34,7 @@ export default function TrialsFilters() {
     <div className="flex flex-col gap-3">
       {/* Search input */}
       <div className="relative">
-        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-cyan-500 pointer-events-none" aria-hidden="true">
+        <div className="absolute left-3 top-1/2 -translate-y-1/2 text-sky-500 pointer-events-none" aria-hidden="true">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -49,7 +49,7 @@ export default function TrialsFilters() {
           aria-label="Search by condition"
           className="w-full pl-9 pr-3 py-2.5 rounded-xl text-sm text-slate-900 placeholder-slate-400
             bg-white border border-slate-300 focus:outline-none focus:ring-2
-            focus:ring-cyan-400/50 focus:border-cyan-500 transition-all duration-200"
+            focus:ring-sky-400/50 focus:border-sky-500 transition-all duration-200"
         />
       </div>
 

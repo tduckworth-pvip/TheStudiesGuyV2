@@ -88,6 +88,7 @@ export interface TrialSearchParams {
   intervention?: string
   status?: string[]
   phase?: string[]
+  sex?: string        // 'MALE' | 'FEMALE' | 'ALL'
   lat?: number
   lng?: number
   radiusMiles?: number
@@ -107,6 +108,7 @@ export async function searchTrials(params: TrialSearchParams): Promise<TrialSear
   if (params.condition) query.set('query.cond', params.condition)
   if (params.intervention) query.set('query.intr', params.intervention)
   if (params.status?.length) query.set('filter.overallStatus', params.status.join(','))
+  // sex is not a valid API filter — filtered client-side from eligibilityModule
   if (params.phase?.length) {
     const numeric = params.phase.map(p => PHASE_API_MAP[p]).filter(Boolean)
     if (numeric.length) query.set('aggFilters', `phase:${numeric.join(',')}`)

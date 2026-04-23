@@ -4,7 +4,7 @@ import { StatusBadge } from '@/app/components/ui/StatusBadge'
 import { SEX_LABELS } from '@/lib/trial-constants'
 import Navbar from '@/app/components/Navbar'
 import ContactSection from './ContactSection'
-import LocationsSection from './LocationsSection'
+import SiteSelectorFlow from './SiteSelectorFlow'
 
 function SectionCard({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -29,15 +29,10 @@ function StatBlock({ label, value }: { label: string; value?: string | number })
 
 interface PageProps {
   params: Promise<{ nctId: string }>
-  searchParams: Promise<{ lat?: string; lng?: string }>
 }
 
-export default async function TrialDetailPage({ params, searchParams }: PageProps) {
+export default async function TrialDetailPage({ params }: PageProps) {
   const { nctId } = await params
-  const sp = await searchParams
-  const patientLat = sp.lat ? parseFloat(sp.lat) : undefined
-  const patientLng = sp.lng ? parseFloat(sp.lng) : undefined
-
   let study
   try {
     study = await getTrialById(nctId)
@@ -78,14 +73,14 @@ export default async function TrialDetailPage({ params, searchParams }: PageProp
             <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
               <StatusBadge status={status} />
               <span className="text-xs font-mono text-slate-500">
-                NCT ID: <span className="text-cyan-600/80">{nctId}</span>
+                NCT ID: <span className="text-sky-600/80">{nctId}</span>
               </span>
             </div>
 
             <h1 className="text-xl md:text-2xl font-bold text-slate-900 leading-snug mb-4">{title}</h1>
 
             {summary && (
-              <p className="text-slate-600 text-sm leading-relaxed border-l-2 border-cyan-500/60 pl-4">
+              <p className="text-slate-600 text-sm leading-relaxed border-l-2 border-sky-500/60 pl-4">
                 {summary}
               </p>
             )}
@@ -119,7 +114,7 @@ export default async function TrialDetailPage({ params, searchParams }: PageProp
                       <div key={i} className="flex flex-col gap-1">
                         <div className="flex items-center gap-2">
                           {inv.type && (
-                            <span className="text-xs px-2 py-0.5 rounded-full bg-cyan-50 text-cyan-700 border border-cyan-200 font-medium">
+                            <span className="text-xs px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 border border-sky-200 font-medium">
                               {inv.type.replace(/_/g, ' ')}
                             </span>
                           )}
@@ -149,7 +144,7 @@ export default async function TrialDetailPage({ params, searchParams }: PageProp
                       <div className="flex flex-col gap-3">
                         <h3 className="text-xs text-slate-500 uppercase tracking-wider font-medium">Primary Outcomes</h3>
                         {primaryOutcomes.map((o, i) => (
-                          <div key={i} className="flex flex-col gap-1 pl-3 border-l-2 border-cyan-400/50">
+                          <div key={i} className="flex flex-col gap-1 pl-3 border-l-2 border-sky-400/50">
                             {o.measure && <p className="text-sm text-slate-900 font-medium">{o.measure}</p>}
                             {o.description && <p className="text-xs text-slate-600 leading-relaxed">{o.description}</p>}
                             {o.timeFrame && <p className="text-xs text-slate-500">Time frame: {o.timeFrame}</p>}
@@ -173,13 +168,16 @@ export default async function TrialDetailPage({ params, searchParams }: PageProp
                 </SectionCard>
               )}
 
-              {/* Study Locations */}
+              {/* Study Locations + Contact Flow */}
               {locations.length > 0 && (
-                <LocationsSection
-                  locations={locations}
-                  patientLat={patientLat}
-                  patientLng={patientLng}
-                />
+                <div id="site-selector">
+                  <SiteSelectorFlow
+                    locations={locations}
+                    nctId={nctId}
+                    trialTitle={title}
+                    sponsorName={sponsor}
+                  />
+                </div>
               )}
             </div>
 
@@ -190,8 +188,6 @@ export default async function TrialDetailPage({ params, searchParams }: PageProp
               <ContactSection
                 centralContacts={centralContacts}
                 officials={officials}
-                nctId={nctId}
-                trialTitle={title}
               />
 
               {/* Eligibility */}

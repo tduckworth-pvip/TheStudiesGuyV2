@@ -43,7 +43,7 @@ function LocationEntry({ loc }: { loc: Location }) {
 
   return (
     <li className="flex items-stretch gap-0">
-      <div className="w-1 shrink-0 rounded-full bg-cyan-400 mr-3" />
+      <div className="w-1 shrink-0 rounded-full bg-sky-400 mr-3" />
       <div className="flex-1 min-w-0 py-0.5">
         {loc.facility && (
           <p className="text-sm font-semibold text-slate-900 leading-snug">{loc.facility}</p>
@@ -69,7 +69,7 @@ function LocationEntry({ loc }: { loc: Location }) {
                 )}
                 {c.email && (
                   <a href={`mailto:${c.email}`}
-                    className="text-xs text-cyan-600 hover:text-cyan-700 hover:underline transition-colors">
+                    className="text-xs text-sky-600 hover:text-sky-700 hover:underline transition-colors">
                     {c.email}
                   </a>
                 )}
@@ -78,7 +78,7 @@ function LocationEntry({ loc }: { loc: Location }) {
           </div>
         )}
         <a href={mapsUrl} target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 mt-1.5 text-xs text-slate-400 hover:text-cyan-600 transition-colors cursor-pointer">
+          className="inline-flex items-center gap-1 mt-1.5 text-xs text-slate-400 hover:text-sky-600 transition-colors cursor-pointer">
           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
               d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -187,7 +187,7 @@ export default function LocationsSection({ locations, patientLat, patientLng }: 
               <div>
                 <h3 className="text-sm font-bold text-slate-900 pb-2 mb-4 border-b border-slate-100 flex items-center justify-between">
                   <span className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-cyan-500" aria-hidden="true" />
+                    <span className="w-2 h-2 rounded-full bg-sky-500" aria-hidden="true" />
                     United States — within 50 miles
                   </span>
                   <span className="text-xs font-normal text-slate-400">
@@ -215,7 +215,7 @@ export default function LocationsSection({ locations, patientLat, patientLng }: 
                 >
                   <span className="flex items-center gap-2">
                     <svg
-                      className={`w-4 h-4 text-cyan-500 transition-transform duration-200 ${collapsedOpen ? 'rotate-180' : ''}`}
+                      className={`w-4 h-4 text-sky-500 transition-transform duration-200 ${collapsedOpen ? 'rotate-180' : ''}`}
                       fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -243,7 +243,7 @@ export default function LocationsSection({ locations, patientLat, patientLng }: 
               <div>
                 <h3 className="text-sm font-bold text-slate-900 pb-2 mb-4 border-b border-slate-100 flex items-center justify-between">
                   <span className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-cyan-500" aria-hidden="true" />
+                    <span className="w-2 h-2 rounded-full bg-sky-500" aria-hidden="true" />
                     United States
                   </span>
                   <span className="text-xs font-normal text-slate-400">
@@ -265,7 +265,7 @@ export default function LocationsSection({ locations, patientLat, patientLng }: 
                 >
                   <span className="flex items-center gap-2">
                     <svg
-                      className={`w-4 h-4 text-cyan-500 transition-transform duration-200 ${collapsedOpen ? 'rotate-180' : ''}`}
+                      className={`w-4 h-4 text-sky-500 transition-transform duration-200 ${collapsedOpen ? 'rotate-180' : ''}`}
                       fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />

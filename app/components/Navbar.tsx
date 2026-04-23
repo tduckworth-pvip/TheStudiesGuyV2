@@ -1,9 +1,10 @@
 import Link from 'next/link'
 
 const NAV_LINKS = [
-  { href: '/trials', label: 'Browse Trials' },
-  { href: '/#how-it-works', label: 'How It Works' },
+  { href: '/', label: 'Home' },
+  { href: '/search', label: 'Guided Search' },
   { href: '/#faq', label: 'FAQ' },
+  { href: '/disclaimer', label: 'Disclaimer' },
 ]
 
 interface NavbarProps {
@@ -18,7 +19,7 @@ interface NavbarProps {
 export default function Navbar({ activePath, cta }: NavbarProps) {
   const ctaClass =
     cta.variant === 'primary'
-      ? 'bg-cyan-500 hover:bg-cyan-600 text-white font-semibold'
+      ? 'bg-sky-500 hover:bg-sky-600 text-white font-semibold'
       : 'bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200'
 
   return (
@@ -27,7 +28,7 @@ export default function Navbar({ activePath, cta }: NavbarProps) {
 
       {/* Logo */}
       <Link href="/" className="flex items-center gap-2 text-slate-900 font-semibold text-lg">
-        <div className="w-8 h-8 rounded-lg bg-cyan-500 flex items-center justify-center">
+        <div className="w-8 h-8 rounded-lg bg-sky-500 flex items-center justify-center">
           <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
               d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
