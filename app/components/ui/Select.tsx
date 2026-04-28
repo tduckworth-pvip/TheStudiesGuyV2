@@ -31,7 +31,7 @@ export function Select({ label, options, id, className = '', ...props }: SelectP
           {...props}
         >
           {options.map(o => (
-            <option key={o.value} value={o.value} className="bg-slate-900 text-white">
+            <option key={o.value} value={o.value}>
               {o.label}
             </option>
           ))}

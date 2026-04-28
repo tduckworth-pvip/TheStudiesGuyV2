@@ -476,6 +476,8 @@ function ContactForm({ selectedSite, nctId, trialTitle, sponsorName, onBack, onS
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...form,
+          ageConsent,
+          dbConsent,
           nctId,
           trialTitle,
           siteName: selectedSite.facility,
