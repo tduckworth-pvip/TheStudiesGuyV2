@@ -296,7 +296,7 @@ export default function GuidedSearchPage() {
           </span>
         </h1>
         <p className="text-slate-500 text-lg max-w-xl mx-auto">
-          Answer a few quick questions and we will surface the most relevant clinical studies from the ClinicalTrials.gov database.
+          Answer a few quick questions and we will surface the most relevant clinical studies.
         </p>
 
         {/* Live stats */}
@@ -735,7 +735,7 @@ export default function GuidedSearchPage() {
                     </div>
                     <h3 className="text-lg font-bold mb-2">Almost there</h3>
                     <p className="text-blue-100 text-sm leading-relaxed">
-                      Fill in your details on the left and we'll find actively recruiting trials that match your profile from the ClinicalTrials.gov database.
+                      Fill in your details on the left and we will find actively recruiting trials that match your profile.
                     </p>
                   </div>
                   <div className="mt-8 space-y-2.5 text-sm">

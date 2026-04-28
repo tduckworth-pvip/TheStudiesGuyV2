@@ -213,8 +213,8 @@ export default async function TrialsPage({ searchParams }: PageProps) {
               {location
                 ? <>Trials within 50 miles of <span className="text-slate-900 font-medium">{location.split(',').slice(0, 2).join(',')}</span></>
                 : hasFilters
-                  ? 'Filtered results from the ClinicalTrials.gov registry'
-                  : 'Browse all registered studies from ClinicalTrials.gov — updated in real time'}
+                  ? 'Filtered results'
+                  : 'Browse all registered studies'}
             </p>
           </div>
 
