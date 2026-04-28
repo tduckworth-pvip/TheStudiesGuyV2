@@ -19,13 +19,6 @@ export default function Footer() {
             <Link href="/search" className="hover:text-gray-900 transition-colors">Guided Search</Link>
             <Link href="/#faq" className="hover:text-gray-900 transition-colors">FAQ</Link>
           </div>
-
-          <p className="text-xs text-gray-400">
-            Data sourced from{" "}
-            <a href="https://clinicaltrials.gov" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-600">
-              ClinicalTrials.gov
-            </a>
-          </p>
         </div>
       </div>
     </footer>

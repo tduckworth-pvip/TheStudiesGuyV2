@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     q: 'How do I know if a trial is safe?',
-    a: 'All trials listed on ClinicalTrials.gov are registered with the U.S. National Library of Medicine. Each trial is reviewed by an Institutional Review Board (IRB) and follows strict federal regulations to protect participants.',
+    a: 'All trials listed here are registered with the U.S. National Library of Medicine. Each trial is reviewed by an Institutional Review Board (IRB) and follows strict federal regulations to protect participants.',
   },
   {
     q: 'Can I leave a trial after joining?',

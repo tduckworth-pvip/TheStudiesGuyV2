@@ -11,7 +11,7 @@ const figtree = Figtree({
 export const metadata: Metadata = {
   title: 'TheStudiesGuy — Find Clinical Trials',
   description:
-    'Search thousands of clinical trials from ClinicalTrials.gov. Find life-changing research studies near you — free to join, no insurance required.',
+    'Search thousands of clinical trials. Find life-changing research studies near you — free to join, no insurance required.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

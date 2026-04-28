@@ -145,21 +145,22 @@ export default function BrowseByCategory() {
   const active = CATEGORIES.find(c => c.id === activeId)!
 
   return (
-    <section className="py-12 px-4">
-      <div className="max-w-5xl mx-auto">
+<section className="py-12 px-4 bg-slate-50">
+  <div className="max-w-7xl mx-auto">
 
-        {/* Heading */}
-        <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
-            Browse a broad selection of new treatments
-          </h2>
-          <p className="text-slate-500">
-            Choose from over 30,000 active clinical trials, with new additions every month.
-          </p>
-        </div>
+    {/* Header */}
+    <div className="text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">
+          Browse a broad selection of new treatments
+        </h2>
 
-        {/* Category tabs — scrollable on mobile */}
-        <div className="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-hide">
+        <p className="text-slate-500">
+          Choose from over 30,000 active clinical trials, with new additions every month.
+        </p>
+      </div>
+
+    {/* Category Tabs */}
+    <div className="flex gap-2 overflow-x-auto pb-2 mb-6 scrollbar-hide">
           {CATEGORIES.map(cat => (
             <button
               key={cat.id}
@@ -178,49 +179,36 @@ export default function BrowseByCategory() {
           ))}
         </div>
 
-        {/* Condition cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {active.conditions.map((condition, i) => (
-            <div
-              key={condition.name}
-              className={[
-                "group relative p-6 rounded-2xl border border-slate-200",
-                BG[i % BG.length],
-                "hover:border-sky-300 hover:shadow-md transition-all duration-200 cursor-pointer",
-              ].join(" ")}
-            >
-              <h3 className="text-slate-900 font-bold text-lg mb-3">{condition.name}</h3>
+    {/* Condition Cards */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {active.conditions.map((condition, i) => (
+        <Link
+          key={condition.name}
+          href={`/trials?condition=${encodeURIComponent(condition.name)}&status=RECRUITING`}
+          className="group bg-white p-7 rounded-3xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-sky-400 transition-all duration-300 hover:-translate-y-1 block"
+        >
+          <h3 className="text-slate-900 font-bold text-xl mb-4 leading-tight">{condition.name}</h3>
 
-              <div className="flex items-end justify-between mb-4">
-                <div>
-                  <span className="text-4xl font-bold text-slate-900" suppressHydrationWarning>
-                    {condition.trials.toLocaleString('en-US')}
-                  </span>
-                  <p className="text-sm text-slate-500 mt-0.5">trials</p>
-                </div>
-                <div className="flex items-center gap-1 text-xs text-emerald-600 font-medium">
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 17L17 7M17 7H7M17 7v10" />
-                  </svg>
-                  {condition.addedThisMonth} added this month
-                </div>
-              </div>
-
-              <Link
-                href={`/trials?condition=${encodeURIComponent(condition.name)}&status=RECRUITING`}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-sky-600 hover:text-sky-700 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 rounded"
-                onClick={e => e.stopPropagation()}
-              >
-                View trials
-                <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
+          <div className="flex items-end justify-between mb-6">
+            <div>
+              <span className="block text-4xl font-extrabold text-slate-900" suppressHydrationWarning>
+                {condition.trials.toLocaleString('en-US')}
+              </span>
+              <span className="text-sm text-slate-400 font-medium tracking-wide uppercase">Active Trials</span>
             </div>
-          ))}
-        </div>
+            <div className="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+              +{condition.addedThisMonth}
+            </div>
+          </div>
 
-      </div>
-    </section>
+          <span className="inline-flex items-center gap-2 text-sm font-bold text-sky-600 group-hover:gap-3 transition-all duration-200">
+            View all trials
+            <span aria-hidden="true">→</span>
+          </span>
+        </Link>
+      ))}
+    </div>
+  </div>
+</section>
   )
 }
